@@ -1,0 +1,18 @@
+﻿@{
+    ViewData["Title"] = "Адмін Панель";
+}
+<h1 class="text-center">Адмін Панель</h1>
+
+<p>Ласкаво просимо в адмін панель! Виберіть дію:</p>
+
+<ul class="list-group">
+    <li class="list-group-item">
+        <a asp-controller="Catalog" asp-action="Index" class="btn btn-primary w-100">Редагувати ігри</a>
+    </li>
+    <li class="list-group-item">
+        <a asp-controller="Admin" asp-action="Users" class="btn btn-primary w-100">Керування користувачами</a>
+    </li>
+    <li class="list-group-item">
+        <a asp-controller="Wishlist" asp-action="AdminIndex" class="btn btn-primary w-100">Списки бажань користувачів</a>
+    </li>
+</ul>

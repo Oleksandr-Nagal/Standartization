@@ -1,0 +1,15 @@
+{
+  "name": "gameuniverse",
+  "version": "1.0.0",
+  "description": "GameUniverse - це унікальна платформа, створена для всіх любителів ігор. Ми прагнемо надати користувачам зручний спосіб дізнаватися про нові ігри, переглядати наш каталог, читати огляди та спілкуватися з іншими гравцями.",
+  "main": "index.js",
+  "devDependencies": {
+    "@storybook/react": "^8.6.12"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

@@ -1,0 +1,17 @@
+﻿@model List<GameUniverse.Models.Wishlist>
+
+@{
+    ViewData["Title"] = "Список Бажань";
+}
+
+<h1 class="text-center">Список Бажань</h1>
+
+<ul class="list-group">
+    @foreach (var item in Model)
+    {
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a asp-action="Details" asp-controller="Catalog" asp-route-id="@item.GameId">@item.Game.Title</a>
+            <a asp-action="Remove" asp-route-id="@item.Id" class="btn btn-danger">Видалити</a>
+        </li>
+    }
+</ul>

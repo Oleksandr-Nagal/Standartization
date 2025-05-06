@@ -1,0 +1,37 @@
+﻿@model GameUniverse.Models.Game
+
+@{
+    ViewData["Title"] = Model.Title;
+    var isInWishlist = ViewBag.IsInWishlist as bool?;
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-6">
+            <img src="@Model.ImageUrl" class="img-fluid rounded shadow" alt="@Model.Title">
+        </div>
+        <div class="col-md-6">
+            <h1>@Model.Title</h1>
+            <p><strong>Опис:</strong> @Model.Description</p>
+            <p><strong>Жанр:</strong> @Model.Genre</p>
+            <p><strong>Розробник:</strong> @Model.Developer</p>
+            <p><strong>Видавець:</strong> @Model.Publisher</p>
+            <p><strong>Дата виходу:</strong> @Model.ReleaseDate.ToShortDateString()</p>
+            <p><strong>Платформа:</strong> @Model.Platform</p>
+            <div class="d-grid gap-2">
+                <a href="/Catalog" class="btn btn-secondary">Назад до каталогу</a>
+                @if (Context.Session.GetString("IsAdmin") != "true")
+                {
+                    @if (isInWishlist == true)
+                    {
+                        <a href="@Url.Action("Remove", "Wishlist", new { gameId = Model.Id })" class="btn btn-danger">Видалити з бажаного</a>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("Add", "Wishlist", new { gameId = Model.Id })" class="btn btn-success">Додати у список бажань</a>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,134 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "GameUniverse API",
+    "version": "v1"
+  },
+  "paths": {
+    "/api/wishlistapi/user/{userId}": {
+      "get": {
+        "summary": "Отримати список бажаних ігор користувача",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "ID користувача"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Список бажаних ігор користувача",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Wishlist"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Бажаний список не знайдено"
+          }
+        }
+      }
+    },
+    "/api/games": {
+      "get": {
+        "summary": "Отримати всі ігри",
+        "responses": {
+          "200": {
+            "description": "Список всіх ігор",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Game"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/games/{id}": {
+      "get": {
+        "summary": "Отримати деталі гри",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "ID гри"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Деталі гри",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Game"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Гру не знайдено"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Game": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer" },
+          "title": { "type": "string" },
+          "description": { "type": "string" },
+          "releaseDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "genre": { "type": "string" },
+          "developer": { "type": "string" },
+          "publisher": { "type": "string" },
+          "imageUrl": { "type": "string" },
+          "platform": { "type": "string" }
+        }
+      },
+      "Genre": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" }
+        }
+      },
+      "Wishlist": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer" },
+          "userId": { "type": "integer" },
+          "gameId": { "type": "integer" },
+          "addedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "game": { "$ref": "#/components/schemas/Game" }
+        }
+      }
+    }
+  }
+}

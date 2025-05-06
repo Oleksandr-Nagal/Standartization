@@ -1,0 +1,27 @@
+﻿@model List<GameUniverse.Models.Wishlist>
+
+@{
+    ViewData["Title"] = "Списки Бажань Користувачів";
+}
+
+<h1 class="text-center">Списки Бажань Користувачів</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Користувач</th>
+            <th>Гра</th>
+            <th>Дата Додавання</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.User.Username (@item.User.Email)</td>
+                <td>@item.Game.Title</td>
+                <td>@item.AddedDate.ToShortDateString()</td>
+            </tr>
+        }
+    </tbody>
+</table>

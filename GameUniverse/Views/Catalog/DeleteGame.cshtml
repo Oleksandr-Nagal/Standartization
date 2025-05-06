@@ -1,0 +1,18 @@
+﻿@model GameUniverse.Models.Game
+
+@{
+    ViewData["Title"] = "Видалити Гру";
+}
+<h1 class="text-center">Видалити Гру</h1>
+
+<form method="post">
+    <div class="mb-3">
+        <label class="form-label">Назва</label>
+        <input type="text" name="Title" class="form-control" value="@Model.Title" readonly />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Опис</label>
+        <textarea name="Description" class="form-control" readonly>@Model.Description</textarea>
+    </div>
+    <button type="submit" class="btn btn-danger">Видалити</button>
+</form>

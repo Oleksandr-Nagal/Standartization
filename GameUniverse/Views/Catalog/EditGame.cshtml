@@ -1,0 +1,68 @@
+﻿@model GameUniverse.Models.Game
+
+@{
+    ViewData["Title"] = "Редагувати Гру";
+}
+<h1 class="text-center">Редагувати Гру</h1>
+
+<form method="post">
+    <div class="mb-3">
+        <label class="form-label">Назва</label>
+        <input type="text" name="Title" class="form-control" value="@Model.Title" required />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Опис</label>
+        <textarea name="Description" class="form-control" required>@Model.Description</textarea>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Жанр</label>
+        <select name="Genre" class="form-control">
+            @foreach (var genre in (List<string>)ViewBag.Genres)
+            {
+                <option value="@genre" selected="@(genre == Model.Genre ? "selected" : null)">@genre</option>
+            }
+        </select>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Розробник</label>
+        <input list="developers" required name="Developer" class="form-control" value="@Model.Developer" />
+        <datalist id="developers">
+            @foreach (var developer in (List<string>)ViewBag.Developers)
+            {
+                <option value="@developer">@developer</option>
+            }
+        </datalist>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Видавець</label>
+        <input list="publishers" required name="Publisher" class="form-control" value="@Model.Publisher" />
+        <datalist id="publishers">
+            @foreach (var publisher in (List<string>)ViewBag.Publishers)
+            {
+                <option value="@publisher">@publisher</option>
+            }
+        </datalist>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Дата Виходу</label>
+        <input type="date" name="ReleaseDate" class="form-control" value="@Model.ReleaseDate.ToString("yyyy-MM-dd")" required />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Назва зображення (без /images)</label>
+        <input type="text" required name="ImageUrl" class="form-control" value="@Model.ImageUrl.Replace("/images/", "")" />
+        @if (!string.IsNullOrEmpty(Model.ImageUrl))
+        {
+            <img src="@("/images/" + Model.ImageUrl)" class="img-fluid mt-2" alt="@Model.Title">
+        }
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Платформа</label>
+        <select name="Platform" class="form-control">
+            @foreach (var platform in (List<string>)ViewBag.Platforms)
+            {
+                <option value="@platform" selected="@(platform == Model.Platform)">@platform</option>
+            }
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Зберегти Зміни</button>
+</form>

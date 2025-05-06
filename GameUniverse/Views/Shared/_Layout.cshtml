@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - GameUniverse</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="icon" type="image/x-icon" href="~/favicon.ico" />
+    <link rel="stylesheet" href="~/GameUniverse.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js"></script>
+    <script>
+        window.addEventListener("load", function(){
+          window.cookieconsent.initialise({
+            palette: {
+              popup: { background: "#000" },
+              button: { background: "#f1d600" }
+            }, 
+            theme: "classic",
+            content: {
+              message: "Ми використовуємо cookie для покращення роботи сайту.",
+              dismiss: "Ок",
+              link: "Детальніше",
+              href: "/Home/Privacy"
+            }
+          });
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="https://localhost:7098/Home/Index">GameUniverse</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse">
+                    <span class="navbar-toggler-icon"></span> 
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item"> <a class="nav-link text-dark" href="https://localhost:7098/Home/Index">Головна</a></li>
+                        <li class="nav-item"> <a class="nav-link text-dark" asp-controller="Catalog" asp-action="Index">Каталог</a></li>
+                        <li class="nav-item"> <a class="nav-link text-dark" href="https://localhost:7098/Home/About">Про нас</a></li>
+                    </ul>
+                    <ul class="navbar-nav"> 
+                        @if (Context.Session.GetString("UserId") == null) 
+                        {
+                            <li class="nav-item"><a class="btn btn-outline-primary me-2" asp-controller="Account" asp-action="Login">Увійти</a></li>
+                            <li class="nav-item"><a class="btn btn-primary" asp-controller="Account" asp-action="Register">Реєстрація</a></li>
+                        }
+                        else
+                        {
+                            @if (Context.Session.GetString("IsAdmin") == "true")
+                            {
+                                <li class="nav-item">
+                                    <a class="btn btn-warning me-2" asp-controller="Admin" asp-action="Index">Адмін Панель</a>
+                                </li>
+                            }
+                            @if (Context.Session.GetString("IsAdmin") == "false")
+                            {
+                            <li class="nav-item"><a class="nav-link text-dark" asp-controller="Wishlist" asp-action="Index">Список бажань</a></li>
+                            }
+                            
+                            <li class="nav-item"><a class="nav-link text-dark" asp-controller="Account" asp-action="Profile">Профіль</a></li>
+                            <li class="nav-item"><a class="btn btn-danger" asp-controller="Account" asp-action="Logout">Вихід</a></li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <footer class="border-top footer text-muted">
+        <div class="container">&copy; 2025 - GameUniverse <a class="text-dark" asp-controller="Home" asp-action="Privacy">Політика конфіденційності</a></div>
+        
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

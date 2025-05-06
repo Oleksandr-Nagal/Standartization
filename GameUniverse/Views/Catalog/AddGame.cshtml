@@ -1,0 +1,64 @@
+﻿@model GameUniverse.Models.Game
+
+@{
+    ViewData["Title"] = "Додати Гру";
+}
+<h1 class="text-center">Додати Нову Гру</h1>
+
+<form method="post">
+    <div class="mb-3">
+        <label class="form-label">Назва</label>
+        <input type="text" name="Title" class="form-control" required />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Опис</label>
+        <textarea name="Description" class="form-control" required></textarea>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Жанр</label>
+        <select name="Genre" class="form-control">
+            @foreach (var genre in (List<string>)ViewBag.Genres)
+            {
+                <option value="@genre">@genre</option>
+            }
+        </select>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Розробник</label>
+        <input list="developers" name="Developer" class="form-control" />
+        <datalist id="developers">
+            @foreach (var developer in (List<string>)ViewBag.Developers)
+            {
+                <option value="@developer">@developer</option>
+            }
+        </datalist>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Видавець</label>
+        <input list="publishers" name="Publisher" class="form-control" />
+        <datalist id="publishers">
+            @foreach (var publisher in (List<string>)ViewBag.Publishers)
+            {
+                <option value="@publisher">@publisher</option>
+            }
+        </datalist>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Дата Виходу</label>
+        <input type="date" name="ReleaseDate" class="form-control" required />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Назва зображення (без /images)</label>
+        <input type="text" name="ImageUrl" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Платформа</label>
+        <select name="Platform" class="form-control">
+            @foreach (var platform in (List<string>)ViewBag.Platforms)
+            {
+                <option value="@platform">@platform</option>
+            }
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Додати</button>
+</form>
